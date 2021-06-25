@@ -19,6 +19,7 @@ class ContactController extends Controller
         return $this->render('index', ['dataProvider'=> $dataProvider]);
     }
     
+    
     /* public function actionView($id)
     {
         $model = Post::findOne($id);
