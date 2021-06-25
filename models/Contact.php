@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\QueryInterface;
 
 /**
  * This is the model class for table "contatti".
@@ -49,4 +50,9 @@ class Contact extends \yii\db\ActiveRecord
             'indirizzo' => 'Indirizzo',
         ];
     }
+    
+    
+    /*public function find() {
+        ;
+    }*/
 }
