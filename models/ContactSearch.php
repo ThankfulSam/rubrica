@@ -38,9 +38,9 @@ class ContactSearch extends Contact
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $order='nome')
     {
-        $query = Contact::find()->orderBy('nome');
+        $query = Contact::find()->orderBy($order);
 
         // add conditions that should always apply here
 

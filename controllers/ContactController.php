@@ -109,6 +109,10 @@ class ContactController extends Controller
         return $this->redirect(['index']);
     }
     
+    
+    /* Metodo che permette di settare come preferito un determinato utente
+     * dalla vista dettagliata del singolo.
+     */
     public function actionPreferred($id)
     {
         
@@ -123,6 +127,21 @@ class ContactController extends Controller
         if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        
+    }
+    
+    /* Metodo che permette di ordinarre la lista di contatti nella rubrica per 
+     * qualche parametro, specificato da $order.
+     */ 
+    public function actionOrdinaPer($order){
+        
+        $searchModel = new ContactSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order);
+        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
         
     }
 

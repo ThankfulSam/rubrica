@@ -33,5 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
         },
     ]) ?>
 
-
+	<p><br>
+		<?php echo Html::a('ordina per nome', ['ordina-per', 'order' => 'nome'], [
+		    'class' => 'btn btn-info'
+		])?>
+		<?php echo Html::a('ordina per numero', ['ordina-per', 'order' => 'telefono'], [
+		    'class' => 'btn btn-info'
+		])?>
+	</p>
 </div>
