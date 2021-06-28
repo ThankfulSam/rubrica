@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cd87f007dcd9d8cf647fb718b0384f8",
+    "content-hash": "7a4acf34df27a462781b0cf52533d76c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -165,6 +165,48 @@
                 "source": "https://github.com/cebe/markdown"
             },
             "time": "2018-03-26T11:24:36+00:00"
+        },
+        {
+            "name": "components/flag-icon-css",
+            "version": "3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lipis/flag-icon-css.git",
+                "reference": "5141384c57972b0b08fc3bb67bea297321fbd799"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lipis/flag-icon-css/zipball/5141384c57972b0b08fc3bb67bea297321fbd799",
+                "reference": "5141384c57972b0b08fc3bb67bea297321fbd799",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "name": "flag-icon-css",
+                    "files": [
+                        "less/**",
+                        "css/**",
+                        "flags/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Panayiotis Lipiridis (Lipis)",
+                    "email": "lipiridis@gmail.com"
+                }
+            ],
+            "description": "CSS for vector based country flags",
+            "support": {
+                "issues": "https://github.com/lipis/flag-icon-css/issues",
+                "source": "https://github.com/lipis/flag-icon-css/tree/3.5.0"
+            },
+            "time": "2020-06-10T11:53:19+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -849,6 +891,117 @@
                 }
             ],
             "time": "2021-05-27T09:17:38+00:00"
+        },
+        {
+            "name": "yii-ui/yii2-flag-icon-css-asset-bundle",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/yii-ui/yii2-flag-icon-css-asset-bundle.git",
+                "reference": "5cd25890021cc4cb98f74346e17d7291a13835d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/yii-ui%2Fyii2-flag-icon-css-asset-bundle/repository/archive.zip?sha=5cd25890021cc4cb98f74346e17d7291a13835d7",
+                "reference": "5cd25890021cc4cb98f74346e17d7291a13835d7",
+                "shasum": ""
+            },
+            "require": {
+                "components/flag-icon-css": "^3.3",
+                "php": ">=7.1",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yiiui\\yii2flagiconcss\\assets\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Möke",
+                    "email": "christophmoeke@gmail.com",
+                    "role": "Project Leader"
+                }
+            ],
+            "description": "Flag icon css asset bundle for Yii 2.",
+            "homepage": "https://www.yii-ui.com/packages/yii2-flag-icon-css-asset-bundle",
+            "keywords": [
+                "asset",
+                "asset-bundle",
+                "extension",
+                "flag-icon-css",
+                "flags",
+                "yii-ui",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/yii-ui/yii2-flag-icon-css-asset-bundle/issues",
+                "source": "https://gitlab.com/yii-ui/yii2-flag-icon-css-asset-bundle"
+            },
+            "time": "2019-07-19T07:11:24+00:00"
+        },
+        {
+            "name": "yii-ui/yii2-flag-icon-css-widget",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/yii-ui/yii2-flag-icon-css-widget.git",
+                "reference": "d9d5bf7547542bec4602460bd791c30916c625a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/yii-ui%2Fyii2-flag-icon-css-widget/repository/archive.zip?sha=d9d5bf7547542bec4602460bd791c30916c625a2",
+                "reference": "d9d5bf7547542bec4602460bd791c30916c625a2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "yii-ui/yii2-flag-icon-css-asset-bundle": "^1.0",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yiiui\\yii2flagiconcss\\widget\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Möke",
+                    "email": "christophmoeke@gmail.com",
+                    "role": "Project Leader"
+                }
+            ],
+            "description": "Flag icon css widget for Yii 2.",
+            "homepage": "https://www.yii-ui.com/packages/yii2-flag-icon-css-widget",
+            "keywords": [
+                "extension",
+                "flag-icon-css",
+                "flags",
+                "widget",
+                "yii-ui",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/yii-ui/yii2-flag-icon-css-widget/issues",
+                "source": "https://gitlab.com/yii-ui/yii2-flag-icon-css-widget"
+            },
+            "time": "2019-07-22T06:44:22+00:00"
         },
         {
             "name": "yiisoft/yii2",

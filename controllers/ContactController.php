@@ -108,6 +108,12 @@ class ContactController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    public function actionPreferred($id)
+    {
+        $model = $this->findModel($id);
+        
+    }
 
     /**
      * Finds the Contact model based on its primary key value.

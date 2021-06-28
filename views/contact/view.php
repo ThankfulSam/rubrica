@@ -24,6 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?php 
+        if($model->preferito == 0){
+            echo Html::a('set as preferred', ['preferred', 'id' => $model->id], ['class' => 'btn btn-info']);
+        } else {
+            echo Html::a('set as not preferred', ['preferred', 'id' => $model->id], ['class' => 'btn btn-info']);
+        }
+            ?>
     </p>
 
     <?= DetailView::widget([
@@ -34,7 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'cognome',
             'telefono',
             'indirizzo',
+            'preferito'
         ],
     ]) ?>
+    
+    
 
 </div>
