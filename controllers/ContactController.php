@@ -8,6 +8,7 @@ use app\models\ContactSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
@@ -130,13 +131,14 @@ class ContactController extends Controller
         
     }
     
-    /* Metodo che permette di ordinarre la lista di contatti nella rubrica per 
+    /* Metodo che permette di ordinare la lista di contatti nella rubrica per 
      * qualche parametro, specificato da $order.
      */ 
     public function actionOrdinaPer($order){
         
         $searchModel = new ContactSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->addOrderBy($order);
         
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -144,7 +146,24 @@ class ContactController extends Controller
         ]);
         
     }
+    
+    /* Metodo che permette di inviare DataProvoder contenente esclusivamente i contatti 
+     * preferiti.
+     */ 
+    public function actionMostraSoloPreferiti()
+    {
 
+        $searchModel = new ContactSearch();
+
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('preferito = 1');
+        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider, 
+        ]);
+    }
+    
     /**
      * Finds the Contact model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
