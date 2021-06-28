@@ -25,7 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'options' => ['tag'=> 'h3'],
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
-           $nome_cognome = $model->nome . ' ' . $model->cognome; 
+           $nome_cognome = $model->nome . ' ' . $model->cognome;
+           if($model->preferito){
+               $nome_cognome = '* ' . $nome_cognome . ' *'; 
+           }
            return Html::a(Html::encode($nome_cognome), ['view', 'id' => $model->id]);
         },
     ]) ?>

@@ -111,7 +111,18 @@ class ContactController extends Controller
     
     public function actionPreferred($id)
     {
+        
         $model = $this->findModel($id);
+        
+        if($model->preferito == 0){
+            $model->preferito = 1;
+        } else {
+            $model->preferito = 0;
+        }
+        
+        if($model->save()){
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
         
     }
 
