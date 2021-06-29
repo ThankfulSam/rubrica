@@ -8,6 +8,7 @@ use app\models\ContactSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
@@ -108,7 +109,61 @@ class ContactController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    
+    /* Metodo che permette di settare come preferito un determinato utente
+     * dalla vista dettagliata del singolo.
+     */
+    public function actionPreferred($id)
+    {
+        
+        $model = $this->findModel($id);
+        
+        if($model->preferito == 0){
+            $model->preferito = 1;
+        } else {
+            $model->preferito = 0;
+        }
+        
+        if($model->save()){
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+        
+    }
+    
+    /* Metodo che permette di ordinare la lista di contatti nella rubrica per 
+     * qualche parametro, specificato da $order.
+     */ 
+    public function actionOrdinaPer($order){
+        
+        $searchModel = new ContactSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->addOrderBy($order);
+        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+        
+    }
+    
+    /* Metodo che permette di inviare DataProvoder contenente esclusivamente i contatti 
+     * preferiti.
+     */ 
+    public function actionMostraSoloPreferiti()
+    {
 
+        $searchModel = new ContactSearch();
+
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('preferito = 1');
+        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider, 
+        ]);
+    }
+    
     /**
      * Finds the Contact model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

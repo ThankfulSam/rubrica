@@ -6,3 +6,4 @@ use yii\helpers\HtmlPurifier;
    <h3><?= Html::encode($model->nome) ?>
    <?= Html::encode($model->cognome) ?></h3>
 </div>
+

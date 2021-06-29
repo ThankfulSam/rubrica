@@ -6,7 +6,7 @@ use Yii;
 use yii\db\QueryInterface;
 
 /**
- * This is the model class for table "contatti".
+ * This is the model class for table "contatticonpreferiti".
  *
  * @property int $id
  * @property string $nome
@@ -21,7 +21,7 @@ class Contact extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'contatti';
+        return 'contatticonpreferiti';
     }
 
     /**
@@ -48,6 +48,7 @@ class Contact extends \yii\db\ActiveRecord
             'cognome' => 'Cognome',
             'telefono' => 'Telefono',
             'indirizzo' => 'Indirizzo',
+            'preferito' => 'Preferito',
         ];
     }
     

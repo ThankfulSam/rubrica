@@ -40,7 +40,7 @@ class ContactSearch extends Contact
      */
     public function search($params)
     {
-        $query = Contact::find()->orderBy('nome');
+        $query = Contact::find();
 
         // add conditions that should always apply here
 
