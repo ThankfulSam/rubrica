@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\debug\models\timeline\DataProvider;
+use app\components\filters\myFilterOrarioSoglia;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
@@ -28,6 +29,10 @@ class ContactController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'myfilter' => [
+                'class' => myFilterOrarioSoglia::className(),
+                'only' => ['create'],
+            ]
         ];
     }
 
