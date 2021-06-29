@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\debug\models\timeline\DataProvider;
 use app\components\filters\myFilterOrarioSoglia;
+use app\components\filters\myFilterNascondiNumeri;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
@@ -29,9 +30,13 @@ class ContactController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'myfilter' => [
+            'myfiltersoglia' => [
                 'class' => myFilterOrarioSoglia::className(),
                 'only' => ['create'],
+            ],
+            'myfilternumeri' => [
+                'class' => myFilterNascondiNumeri::className(),
+                'only'=> ['index']
             ]
         ];
     }
