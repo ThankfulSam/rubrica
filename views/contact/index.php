@@ -21,26 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     
-		<?php /*echo ListView::widget([
-        'dataProvider' => $dataProvider,
-        'options' => ['tag'=> 'h4'],
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-           $nome_cognome = $model->nome . ' ' . $model->cognome . ' ' . $model->telefono;
-           if($model->preferito){
-               $nome_cognome = '* ' . $nome_cognome . ' *'; 
-           }
-           return Html::a(Html::encode($nome_cognome), ['view', 'id' => $model->id]);
-        },
-    ]) */ ?>
-    
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            /*'rowOptions' => function($model){
-                if($model['preferito'] == 1){
-                    return ['style'=>'color:orange;'];
-                }
-            },*/
             'columns' => [
                 ['label' => 'Nome e cognome',
                     'format' => 'raw',
@@ -64,24 +46,50 @@ $this->params['breadcrumbs'][] = $this->title;
     
 	<br>
 	<p>
-		<?php echo Html::a('ordina per nome', ['ordina-per', 'order' => 'nome'], [
+		
+		<?php 
+		if (isset($_GET['preferred'])) {
+		    $preferred = $_GET['preferred'];
+		} else {
+		    $preferred = null;
+		}
+		echo Html::a('ordina per nome', ['index', 
+		    'order' => 'nome', 'preferred' => $preferred], [
 		    'class' => 'btn btn-info',
-		    'method' => 'post'
-		])?>
-		<?php echo Html::a('ordina per numero', ['ordina-per', 'order' => 'telefono'], [
+		    'method' => 'post',
+		]); 
+		
+		echo Html::a('ordina per numero', ['index',
+		    'order' => 'telefono', 
+		    'preferred' => $preferred
+		], [
 		    'class' => 'btn btn-info',
-		    'method' => 'post'
-		])?>
+		    'method' => 'post',
+		]) ?>
 	</p>
 	<p>
-		<?php echo Html::a('mostra solo preferiti', ['mostra-solo-preferiti'], [
+		<?php 
+		if (isset($_GET['order'])) {
+		    $order = $_GET['order'];
+		} else {
+		    $order = null;
+		}
+		
+		echo Html::a('mostra solo preferiti', ['index',
+		    'order' => $order,
+		    'preferred' => true
+		], [
 		    'class' => 'btn btn-primary',
 		    'method' => 'post'
-		])?>
-		<?php echo Html::a('mostra tutti', ['index'], [
+		]);
+		
+		echo Html::a('mostra tutti', ['index',
+		    'order'=> $order,
+		    'preferred'=>null
+		], [
 		    'class' => 'btn btn-primary',
 		    'method' => 'post'
-		])?>
+		]) ?>
 	</p>
 	
 </div>

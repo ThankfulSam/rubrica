@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\debug\models\timeline\DataProvider;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
@@ -31,14 +32,22 @@ class ContactController extends Controller
     }
 
     /**
-     * Lists all Contact models.
+     * Lists all Contact models, diversi a seconda dei parametri passati.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($order=null, $preferred=null)
     {
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        
+        if (isset($order)){
+            $dataProvider->query->addOrderBy($order);
+        }
+        
+        if (isset($preferred)){
+            $dataProvider->query->andWhere('preferito = 1');
+        }
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -129,39 +138,6 @@ class ContactController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
         
-    }
-    
-    /* Metodo che permette di ordinare la lista di contatti nella rubrica per 
-     * qualche parametro, specificato da $order.
-     */ 
-    public function actionOrdinaPer($order){
-        
-        $searchModel = new ContactSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->addOrderBy($order);
-        
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-        
-    }
-    
-    /* Metodo che permette di inviare DataProvoder contenente esclusivamente i contatti 
-     * preferiti.
-     */ 
-    public function actionMostraSoloPreferiti()
-    {
-
-        $searchModel = new ContactSearch();
-
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere('preferito = 1');
-        
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider, 
-        ]);
     }
     
     /**
