@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\grid\GridView;
 
@@ -10,6 +11,7 @@ use yii\grid\GridView;
 
 $this->title = 'RUBRICA';
 $this->params['breadcrumbs'][] = $this->title;
+$request = Yii::$app->request;
 ?>
 <div class="contact-index" align="center">
 
@@ -48,47 +50,42 @@ $this->params['breadcrumbs'][] = $this->title;
 	<p>
 		
 		<?php 
-		if (isset($_GET['preferred'])) {
-		    $preferred = $_GET['preferred'];
-		} else {
-		    $preferred = null;
-		}
-		echo Html::a('ordina per nome', ['index', 
-		    'order' => 'nome', 'preferred' => $preferred], [
-		    'class' => 'btn btn-info',
-		    'method' => 'post',
-		]); 
 		
-		echo Html::a('ordina per numero', ['index',
-		    'order' => 'telefono', 
-		    'preferred' => $preferred
-		], [
-		    'class' => 'btn btn-info',
-		    'method' => 'post',
+    		$preferred = $request->get('preferred');
+    		
+    		echo Html::a('ordina per nome', ['index', 
+    		    'order' => 'nome', 'preferred' => $preferred], [
+    		    'class' => 'btn btn-info',
+    		    'method' => 'post',
+    		]); 
+    		
+    		echo Html::a('ordina per numero', ['index',
+    		    'order' => 'telefono', 
+    		    'preferred' => $preferred
+    		], [
+    		    'class' => 'btn btn-info',
+    		    'method' => 'post',
 		]) ?>
 	</p>
 	<p>
 		<?php 
-		if (isset($_GET['order'])) {
-		    $order = $_GET['order'];
-		} else {
-		    $order = null;
-		}
 		
-		echo Html::a('mostra solo preferiti', ['index',
-		    'order' => $order,
-		    'preferred' => true
-		], [
-		    'class' => 'btn btn-primary',
-		    'method' => 'post'
-		]);
-		
-		echo Html::a('mostra tutti', ['index',
-		    'order'=> $order,
-		    'preferred'=>null
-		], [
-		    'class' => 'btn btn-primary',
-		    'method' => 'post'
+    		$order = $request->get('order');
+    		
+    		echo Html::a('mostra solo preferiti', ['index',
+    		    'order' => $order,
+    		    'preferred' => true
+    		], [
+    		    'class' => 'btn btn-primary',
+    		    'method' => 'post'
+    		]);
+    		
+    		echo Html::a('mostra tutti', ['index',
+    		    'order'=> $order,
+    		    'preferred'=>null
+    		], [
+    		    'class' => 'btn btn-primary',
+    		    'method' => 'post'
 		]) ?>
 	</p>
 	
