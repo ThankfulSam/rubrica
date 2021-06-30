@@ -16,8 +16,4 @@ class myFilterNascondiNumeri extends ActionFilter
        
     }
     
-    private function filterNumber($string){
-        //return substr_replace($string, '*', 3);
-    }
-    
 }
