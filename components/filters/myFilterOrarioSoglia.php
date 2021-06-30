@@ -7,7 +7,7 @@ use yii\web\HttpException;
 class myFilterOrarioSoglia extends ActionFilter
 {
 
-    private $orarioSoglia = '12:00';
+    private $orarioSoglia = '08:00';
     
     public function beforeAction($action)
     {
