@@ -88,5 +88,9 @@ $request = Yii::$app->request;
     		    'method' => 'post'
 		]) ?>
 	</p>
+	<?php if(!Yii::$app->user->isGuest){
+	    echo \Yii::$app->user->identity->username;
+	}
 	
+	?>
 </div>

@@ -12,6 +12,7 @@ use yii\data\ActiveDataProvider;
 use yii\debug\models\timeline\DataProvider;
 use app\components\filters\myFilterOrarioSoglia;
 use app\components\filters\myFilterNascondiNumeri;
+use yii\filters\AccessControl;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
@@ -37,7 +38,7 @@ class ContactController extends Controller
             'myfilternumeri' => [
                 'class' => myFilterNascondiNumeri::className(),
                 'only'=> ['index']
-            ]
+            ],
         ];
     }
 

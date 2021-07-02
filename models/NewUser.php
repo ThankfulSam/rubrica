@@ -63,6 +63,11 @@ class NewUser extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->id;
     }
+    
+    public function getUsername()
+    {
+        return \Yii::$app->user->identity->username;
+    }
 
     public function validateAuthKey($authKey)
     {
