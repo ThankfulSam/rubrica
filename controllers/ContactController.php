@@ -19,6 +19,18 @@ use yii\filters\AccessControl;
  */
 class ContactController extends Controller
 {
+    
+    public $user_id;
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Controller::__construct()
+     */
+    public function __construct($id, $module, $config = array())
+    {
+        parent::__construct($id, $module, $config);
+        $this->user_id = Yii::$app->user->getId();
+        }
+    
     /**
      * {@inheritdoc}
      */
@@ -50,6 +62,8 @@ class ContactController extends Controller
     {
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $dataProvider->query->andWhere(['user_id' => $this->user_id]);
         
         if (isset($order)){
             $dataProvider->query->addOrderBy($order);
@@ -87,8 +101,11 @@ class ContactController extends Controller
     {
         $model = new Contact();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->user_id = $this->user_id;
+            if($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
