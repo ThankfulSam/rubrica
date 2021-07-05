@@ -21,7 +21,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\NewUser',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -53,6 +53,13 @@ $config = [
         ],
         
     ],
+    /*'as access' => [
+        'class' => yii\filters\AccessControl::class,
+        'except' => ['site/login', 'site/signup', 'site/about'],
+        'rules' => [
+            ['allow' => true, 'roles' => ['@']],
+        ],
+    ],*/
     'params' => $params,
 ];
 

@@ -13,6 +13,7 @@ use yii\db\QueryInterface;
  * @property string $cognome
  * @property string $telefono
  * @property string|null $indirizzo
+ * @property string|null $user_id
  */
 class Contact extends \yii\db\ActiveRecord
 {

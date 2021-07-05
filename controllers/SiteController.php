@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\NewUser;
 
 class SiteController extends Controller
 {
@@ -124,5 +125,26 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    public function actionSignup()
+    {
+        $model = new NewUser();
+        
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                $model->password = Yii::$app->security->generatePasswordHash($model->password);
+                $model->authKey = \Yii::$app->security->generateRandomString();
+                $model->accessToken =  \Yii::$app->security->generateRandomString();
+                
+                if($model->save()){
+                    return $this->redirect(['login']);
+                }
+            }
+        }
+        
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 }

@@ -12,12 +12,27 @@ use yii\data\ActiveDataProvider;
 use yii\debug\models\timeline\DataProvider;
 use app\components\filters\myFilterOrarioSoglia;
 use app\components\filters\myFilterNascondiNumeri;
+use yii\filters\AccessControl;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
  */
 class ContactController extends Controller
 {
+    
+    /*attributo che indica l'id dell'utente per operazioni di ricerca e inserimento*/
+    public $user_id;
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Controller::__construct()
+     * Reimplementato il metodo __construct con aggiunta del parametro user_id
+     */
+    public function __construct($id, $module, $config = array())
+    {
+        parent::__construct($id, $module, $config);
+        $this->user_id = Yii::$app->user->getId();
+        }
+    
     /**
      * {@inheritdoc}
      */
@@ -37,6 +52,16 @@ class ContactController extends Controller
             'myfilternumeri' => [
                 'class' => myFilterNascondiNumeri::className(),
                 'only'=> ['index']
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                
             ]
         ];
     }
@@ -49,6 +74,8 @@ class ContactController extends Controller
     {
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $dataProvider->query->andWhere(['user_id' => $this->user_id]);
         
         if (isset($order)){
             $dataProvider->query->addOrderBy($order);
@@ -86,8 +113,11 @@ class ContactController extends Controller
     {
         $model = new Contact();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->user_id = $this->user_id;
+            if($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
