@@ -20,10 +20,12 @@ use yii\filters\AccessControl;
 class ContactController extends Controller
 {
     
+    /*attributo che indica l'id dell'utente per operazioni di ricerca e inserimento*/
     public $user_id;
     /**
      * {@inheritDoc}
      * @see \yii\base\Controller::__construct()
+     * Reimplementato il metodo __construct con aggiunta del parametro user_id
      */
     public function __construct($id, $module, $config = array())
     {
@@ -51,6 +53,16 @@ class ContactController extends Controller
                 'class' => myFilterNascondiNumeri::className(),
                 'only'=> ['index']
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                
+            ]
         ];
     }
 

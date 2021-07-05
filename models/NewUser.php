@@ -54,7 +54,7 @@ class NewUser extends \yii\db\ActiveRecord implements IdentityInterface
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getContatticonpreferitis()
+    public function getContatticonpreferiti()
     {
         return $this->hasMany(Contact::className(), ['user_id' => 'id']);
     }
